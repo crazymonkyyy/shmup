@@ -1,4 +1,5 @@
 import consants;
+import raylib;
 struct player{
 	int x;
 	int y;
@@ -16,6 +17,9 @@ struct enemyship{
 	int hp;
 	bool isdead(){
 		return y>playfieldy+100;
+	}
+	Rectangle boundingbox(){
+		return shipbox[type];
 	}
 }
 struct unspawned{
@@ -63,7 +67,7 @@ alias turrets     =ringarray!(turret,50);
 alias spikes      =ringarray!(spike,50);
 alias powerups    =ringarray!(powerup,30);
 alias bullets     =ringarray!(bullet,100);
-alias enemybullets=ringarray!(bullet,150);
+alias enemybullets=ringarray!(bullet,1500);
 alias unspawneds  =unspawned[];
 //----
 alias tile=ubyte;

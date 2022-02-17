@@ -25,6 +25,11 @@ void drawbullets(bullets bs){
 		drawtile(b.which,b.x,b.y);
 	}
 }
+void drawenemybullets(enemybullets bs){
+	foreach(b;bs){
+		drawtile(b.which,b.x,b.y);
+	}
+}
 void drawenemys(enemyships es){
 	foreach(e;es){
 		drawship(e.type,e.x,e.y,e.type<4?2:1);}
