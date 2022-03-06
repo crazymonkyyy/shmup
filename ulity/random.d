@@ -19,6 +19,13 @@ Vector2[][] randomarrayarray(){
 	}
 	return o;
 }
+Vector2[][][] randomarrayarrayarray(){
+	Vector2[][][] o;
+	foreach(i;0..uniform(1,7)){
+		o~=randomarrayarray;
+	}
+	return o;
+}
 Vector2[2] randompair(){
 	return [randomvec,randomvec];
 }

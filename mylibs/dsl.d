@@ -32,3 +32,12 @@ void indexpointer2dseasonal(ref vec2 pos,vec2[][][] zones,int zonesize,int i,int
 	pos.x+=whichzone.x;
 	pos.y+=whichzone.y;
 }
+void avoidence(ref vec2 pos,vec2[][] repluser,int zonesize){
+	ref which(){
+		return repluser
+			[pos.x.to!int/zonesize % $]
+			[pos.y.to!int/zonesize % $]
+		;}
+	auto vel=which-pos;
+	pos+=vel;
+}

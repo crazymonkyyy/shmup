@@ -10,7 +10,7 @@ enum windowy=400;
 
 int cellsize=50;
 
-Vector2[2][][] program;
+Vector2[][][] program;
 
 void main(){
 	InitWindow(windowx, windowy, "Hello, Raylib-D!");
@@ -26,10 +26,13 @@ void main(){
 	}
 	void randomprog(){
 		import random;
-		program=randompairarrayarray;
+		program=randomarrayarrayarray;
 	}
 	randompoints;
 	randomprog;
+	
+	
+	int j;
 	while (!WindowShouldClose()){
 		BeginDrawing();
 			ClearBackground(Colors.BLACK);
@@ -41,9 +44,12 @@ void main(){
 				program.writeln;
 				randompoints;
 			}
+			if(j%5==0){foreach(i;0..100){
+				indexpointer2dseasonal(points[i],program,cellsize,j/5,30);
+			}}
 			foreach(i;0..100){
-				indexpointer2dsubpixel(points[i],program,cellsize);
 				DrawCircleV(points[i],5,Colors.BLUE);}
+			j++;
 		EndDrawing();
 	}
 }
