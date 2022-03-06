@@ -10,11 +10,7 @@ enum windowy=400;
 
 int cellsize=50;
 
-Vector2[][] program=[
-	[vec2(1,1),vec2(-1,1)],
-	[vec2(0,1)],
-	[vec2(-1,1),vec2(1,1),vec2(0,1)],
-];
+Vector2[2][][] program;
 
 void main(){
 	InitWindow(windowx, windowy, "Hello, Raylib-D!");
@@ -30,7 +26,7 @@ void main(){
 	}
 	void randomprog(){
 		import random;
-		program=randomarrayarray;
+		program=randompairarrayarray;
 	}
 	randompoints;
 	randomprog;
@@ -46,7 +42,7 @@ void main(){
 				randompoints;
 			}
 			foreach(i;0..100){
-				indexpointer2d(points[i],program,cellsize);
+				indexpointer2dsubpixel(points[i],program,cellsize);
 				DrawCircleV(points[i],5,Colors.BLUE);}
 		EndDrawing();
 	}
