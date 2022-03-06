@@ -49,7 +49,7 @@ void update(ref enemybullets bs){
 		b.y+=b.yv;
 	}
 }
-void update(ref enemyships es,ref enemybullets eb,ref bullets bs){
+void update(ref enemyships es,ref enemybullets eb,ref bullets bs,ref sounds deathsounds){
 	foreach(ref e;es){
 		import aiconsants;
 		e.x+=aimovement[e.type]
@@ -85,7 +85,9 @@ void update(ref enemyships es,ref enemybullets eb,ref bullets bs){
 				b.y-=3000;
 				e.hp--;
 				if(e.hp==0){
+					e.hp=100;
 					e.y+=3000;
+					PlaySoundMulti(deathsounds[e.type/10]);//TODO
 				}
 			}
 		}

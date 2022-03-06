@@ -9,8 +9,21 @@ enum windowy=playfieldy;
 
 void main(){
 	
+	sounds deatheffects;
+	
+
+	
+	
 	
 	mixin(import("drawing.mix"));
+	InitAudioDevice(); 
+	deatheffects~=LoadSound("assets/1.wav");
+	deatheffects~=LoadSound("assets/2.wav");
+	deatheffects~=LoadSound("assets/3.wav");
+	SetSoundVolume(deatheffects[0], 0.2f);
+	SetSoundVolume(deatheffects[1], 0.2f);
+	SetSoundVolume(deatheffects[2], 0.2f);
+	//TODO audio mixin
 	background bg;
 	auto backgroundbuffer=File("gen","r").byLineCopy;
 	foreach(i;0..35){
@@ -39,7 +52,7 @@ void main(){
 			drawenemys(es);
 			p.update(b,eb);
 			b.update;
-			es.update(eb,b);
+			es.update(eb,b,deatheffects);
 			eb.update;
 			u.update(scroll,es);scroll++;
 			DrawText("Hello, World!", 10,10, 20, Colors.WHITE);

@@ -69,6 +69,7 @@ alias powerups    =ringarray!(powerup,30);
 alias bullets     =ringarray!(bullet,100);
 alias enemybullets=ringarray!(bullet,1500);
 alias unspawneds  =unspawned[];
+alias sounds      =Sound[];
 //----
 alias tile=ubyte;
 alias tilerow=tile[25];
