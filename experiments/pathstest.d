@@ -5,28 +5,32 @@ import gameplay;
 import consants;
 import dsl;
 
+import pathfollow_;
+
 enum windowx=400;
 enum windowy=400;
 
 int cellsize=15;
 
-Vector2[][] program;
+Vector2[] program;
 
 void main(){
 	InitWindow(windowx, windowy, "Hello, Raylib-D!");
 	SetWindowPosition(1800,0);
 	SetTargetFPS(60);
 	
-	Vector2[100] points;
+	pathfollow[100] points;
 	void randompoints(){
 		foreach(i;0..100){
-			points[i].x=uniform(0,400);
-			points[i].y=uniform(0,400);
+			points[i].pos.x=uniform(0,400);
+			points[i].pos.y=uniform(0,400);
+			points[i].target.x=float.nan;
 		}
 	}
 	void randomprog(){
 		import random;
-		program=randomarrayarray;
+		program=randomarray;
+		program.writeln;
 	}
 	randompoints;
 	randomprog;
@@ -44,11 +48,11 @@ void main(){
 				program.writeln;
 				randompoints;
 			}
-			if(j%5==0){foreach(i;0..100){
-				avoidence(points[i],program,cellsize);
+			if(true){foreach(i;0..100){
+				update(points[i],program);
 			}}
 			foreach(i;0..100){
-				DrawCircleV(points[i],5,Colors.BLUE);}
+				DrawCircleV(points[i].pos,5,Colors.BLUE);}
 			j++;
 		EndDrawing();
 	}

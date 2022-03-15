@@ -38,6 +38,40 @@ void avoidence(ref vec2 pos,vec2[][] repluser,int zonesize){
 			[pos.x.to!int/zonesize % $]
 			[pos.y.to!int/zonesize % $]
 		;}
-	auto vel=which-pos;
+	Vector2 near=which;
+	near.x+=pos.x.to!int/zonesize*zonesize;
+	near.y+=pos.y.to!int/zonesize*zonesize;
+	auto vel=pos-near;
+	pos+=Vector2Normalize(vel)*5;
+}
+void avoidencev2(ref vec2 pos,vec2[][] repluser,int zonesize){
+	auto which(){
+		return repluser
+			[pos.x.to!int/zonesize % $]
+			[pos.y.to!int/zonesize % $]
+		;}
+	auto zone(){
+		return Vector2(
+			pos.x.to!int/zonesize*zonesize,
+			pos.y.to!int/zonesize*zonesize,
+		);
+	}
+		
+	Vector2 local;
+	local.x=pos.x-zone.x;
+	local.y=pos.y-zone.y;
+	local.x/=zonesize;
+	local.y/=zonesize;
+	local.x-=.5;
+	local.x-=.5;
+	Vector2 store;
+	store.x=local.x*which.x-local.y*which.y;
+	store.y=local.x*which.y+local.y*which.x;
+	store.x-=.5;
+	store.y-=.5;
+	//near.x+=pos.x.to!int/zonesize*zonesize;
+	//near.y+=pos.y.to!int/zonesize*zonesize;
+	auto vel=pos-store;
+	pos+=Vector2Normalize(vel)*5;
 	pos+=vel;
 }

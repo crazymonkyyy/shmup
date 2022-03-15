@@ -3,14 +3,22 @@ import types;
 import basic;
 import gameplay;
 import consants;
-import dsl;
 
-enum windowx=400;
-enum windowy=400;
+import zonemovement;
+
+enum windowx=playfieldx;
+enum windowy=playfieldy;
 
 int cellsize=15;
 
 Vector2[][] program;
+Vector2[5] edges=[
+	Vector2( 0, 1),
+	Vector2( 0,-1),
+	Vector2( 1, 0),
+	Vector2(-1, 0),
+	Vector2( 0.1, 1),
+];
 
 void main(){
 	InitWindow(windowx, windowy, "Hello, Raylib-D!");
@@ -20,13 +28,14 @@ void main(){
 	Vector2[100] points;
 	void randompoints(){
 		foreach(i;0..100){
-			points[i].x=uniform(0,400);
-			points[i].y=uniform(0,400);
+			points[i].x=uniform(0,playfieldx);
+			points[i].y=uniform(0,playfieldy);
 		}
 	}
 	void randomprog(){
 		import random;
 		program=randomarrayarray;
+		program.writeln;
 	}
 	randompoints;
 	randomprog;
@@ -44,8 +53,8 @@ void main(){
 				program.writeln;
 				randompoints;
 			}
-			if(j%5==0){foreach(i;0..100){
-				avoidence(points[i],program,cellsize);
+			if(true){foreach(i;0..100){
+				indexpointer2dwithcontainment(points[i],program,10,edges);
 			}}
 			foreach(i;0..100){
 				DrawCircleV(points[i],5,Colors.BLUE);}
