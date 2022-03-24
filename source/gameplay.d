@@ -3,7 +3,34 @@ import raylib;
 import std.algorithm;
 import consants;
 import basic;
-
+import aiconsants;
+void update(ref bigships s){
+	import pathfollow;
+	foreach(ref e;s){
+		e.updatepath(bigshippaths[e.type]);//todo bug fix pathfollow
+}}
+void update(ref midships s){
+	import zonemovement;
+	foreach(ref e;s){
+		enum temp=[
+			[Vector2(1,1),Vector2(-1,1)],
+			[Vector2(-1,1),Vector2(1,1)],
+		];
+		indexpointer2dwithcontainment(e.pos,temp,10,[Vector2(0,1),Vector2(0,-1),Vector2(1,0),Vector2(-1,0),Vector2(1,1)]);
+}}//todo update this to be more complex
+void update(ref smlships s){
+	import dsl;
+	static int i;
+	i++;
+	foreach(ref e;s){
+		enum temp=[
+			[[Vector2(1,1),Vector2(-1,1)]],
+			[[Vector2(-1,1),Vector2(1,1)]],
+		];
+		indexpointer2dseasonal(e.pos,temp,10,i,30);
+	}
+}
+/*
 void update(ref player p,ref bullets b,ref enemybullets eb){
 	enum speed=4;
 	if (IsKeyDown(KeyboardKey.KEY_RIGHT)) p.x+=speed;
@@ -111,3 +138,4 @@ void update(ref unspawneds u,int scroll,ref enemyships es){
 		goto l;
 	}
 }
+*/

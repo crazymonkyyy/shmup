@@ -9,18 +9,24 @@ struct player{
 	int lives;
 	int firecd;
 }
-struct enemyship{
-	int x;
-	int y;
-	int type;
+struct bigship{
+	Vector2 pos;
 	int firecd;
+	int type;
 	int hp;
-	bool isdead(){
-		return y>playfieldy+100;
-	}
-	Rectangle boundingbox(){
-		return shipbox[type];
-	}
+	enum isdead=false;//TODO:
+	Vector2 target=Vector2(float.init,float.init);//make constuctors?
+}
+struct midship{
+	Vector2 pos;
+	int firecd;
+	int type;
+	enum isdead=false;//TODO
+}
+struct smlship{
+	Vector2 pos;
+	int type;
+	enum isdead=false;//TODO
 }
 struct unspawned{
 	int x;
@@ -62,7 +68,10 @@ struct bullet{
 	}
 }
 import ring;
-alias enemyships  =ringarray!(enemyship,100);
+//todo add shiparrays
+alias bigships    =ringarray!(bigship,20);
+alias midships    =ringarray!(midship,50);
+alias smlships    =ringarray!(smlship,300);
 alias turrets     =ringarray!(turret,50);
 alias spikes      =ringarray!(spike,50);
 alias powerups    =ringarray!(powerup,30);
