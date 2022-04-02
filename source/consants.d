@@ -1,5 +1,6 @@
 enum playfieldx=800;
 enum playfieldy=1080;
+enum scrollspeed=1;
 
 //.type<4? : //magic if ship is big copypaste
 

@@ -5,44 +5,83 @@ import tile;
 mixin setupdraw!("tile");
 import ship;
 mixin setupdraw!("ship");
+import ascii;
+mixin setupdraw!("ascii");
 //TODO, recreate the overload hack in survoir/drawing.mix
-void drawtilerow(tilerow a,int y){
-	foreach(i,e;a){
-		drawtile(e,(i*32).to!int,y,2);
+template draw_(){
+	void drawtilerow(tilerow a,int y){
+		foreach(i,e;a){
+			drawtile(e,(i*32).to!int,y,2);
+		}
 	}
-}
-void drawbackground(background bg,int offset){
-	import std.range;
-	foreach(i,ref row;bg[].enumerate){
-		import consants;
-		drawtilerow(row,playfieldy-cast(int)(i)*32+offset);
-}}
-void drawplayer(player a){
-	drawship(0,a.x,a.y,2);
-}
-void drawbullets(bullets bs){
-	foreach(b;bs){
-		drawtile(b.which,b.x,b.y);
+	void drawasciirow(string a,int y){
+		foreach(i,e;a){
+			drawascii(e,(i*48).to!int,y,1);
+		}
 	}
-}
-void drawenemybullets(enemybullets bs){
-	foreach(b;bs){
-		drawtile(b.which,b.x,b.y);
+	void drawbackground(int size,T)(T bg,int offset){
+		import std.range;
+		foreach(i,ref row;bg[].enumerate){
+			import consants;
+			drawtilerow(row,playfieldy-cast(int)(i)*size+offset);
+	}}
+	void drawwords(int size,T)(T bg,int offset){
+		import std.range;
+		foreach(i,ref row;bg[].enumerate){
+			import consants;
+			drawasciirow(row,playfieldy-cast(int)(i)*size+offset);
+	}}
+	void draw(background bg){
+		drawbackground!(32)(bg.tiles,-bg.offset);
+		drawwords!(48)(bg.words,0);
 	}
+	void draw(player a){
+		drawship(0,a.x,a.y,2);
+	}
+	void draw(bullets bs){
+		foreach(b;bs){
+			drawtile(b.which,b.x,b.y);
+		}
+	}
+	void draw(enemybullets bs){
+		foreach(b;bs){
+			drawtile(b.which,b.x,b.y);
+		}
+	}
+	void draw(bigships ss){
+		foreach(s;ss){
+			drawship(s.type+1,cast(int)s.pos.x,cast(int)s.pos.y,2);
+	}}
+	void draw(midships ss){
+		foreach(s;ss){
+			drawship(s.type+4,cast(int)s.pos.x,cast(int)s.pos.y,1.5);
+	}}
+	void draw(smlships ss){
+		foreach(s;ss){
+			drawship(s.type+16,cast(int)s.pos.x,cast(int)s.pos.y,1);
+	}}
+	void draw(collect c){
+		final switch(c.type){ with(collectable){
+			case mine:
+				drawtile(16,c.x,c.y,2); break;
+			case life:
+				drawtile(24,c.x,c.y,2); break;
+			case power:
+				drawtile(25,c.x,c.y,2); break;
+			case hp:
+				drawtile(26,c.x,c.y,2); break;
+		}}
+	}
+	void draw(collectables c){
+		foreach(e;c){
+			draw(e);
+	}}
 }
-void draw1(bigships ss){
-	foreach(s;ss){
-		drawship(s.type+1,cast(int)s.pos.x,cast(int)s.pos.y,2);
-}}
-void draw2(midships ss){
-	foreach(s;ss){
-		drawship(s.type+4,cast(int)s.pos.x,cast(int)s.pos.y,1.5);
-}}
-void draw3(smlships ss){
-	foreach(s;ss){
-		drawship(s.type+16,cast(int)s.pos.x,cast(int)s.pos.y,1);
-}}
 //void drawenemys(enemyships es){
 //	foreach(e;es){
 //		drawship(e.type,e.x,e.y,e.type<4?2:1);}
 //}
+
+auto draw(T...)(T args){
+	draw_!().draw(args);
+}

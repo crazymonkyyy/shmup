@@ -40,3 +40,40 @@ enum bigshippaths=[
 	generatepath(Vector2(0,playfieldy*.2),Vector2(50,100),Vector2(50,-100),15)
 		~generatepath(Vector2(playfieldx,playfieldy*.2),Vector2(-50,100),Vector2(-50,-100),15),
 ];
+enum bigshipfirecd=[
+	30,30,30];//TODO
+enum bigshipbulletpattens=[
+	[Vector2(0,5)],
+	[Vector2(-2,2),Vector2(0,4),Vector2(2,2)],
+];
+enum midshippattern=[
+	[
+		[Vector2(0,1),Vector2(0,5)],
+		[Vector2(0,5),Vector2(0,1)],
+	],
+	[
+		[Vector2(-1,1),Vector2(1,1)],
+		[Vector2(1,1),Vector2(-1,1)],
+	],
+];
+enum midshipbounds=[
+	[Vector2(0,1),Vector2(0,-1),Vector2(1,0),Vector2(-1,0),Vector2(0, 1),],
+	[Vector2(0,1),Vector2(0,-1),Vector2(1,0),Vector2(-1,0),Vector2(0,-1),],
+	[Vector2(0,0),Vector2(0, 0),Vector2(0,0),Vector2( 0,0),Vector2(0, 0),],
+];
+enum midshipfirecd=[
+	30,30,30];//TODO
+enum midshipfirepattern=[
+	[Vector2(0,5)],
+	[Vector2(-2,2),Vector2(0,4),Vector2(2,2)],
+];
+enum smlshippattern=[
+	[
+		[[Vector2(1,1),Vector2(-1,1)],[Vector2(-1,1),Vector2(1,1)]],
+		[[Vector2(-1,1),Vector2(1,1)],[Vector2(1,1),Vector2(-1,1)]],
+	],
+	[
+		[[Vector2(1,1),Vector2(-1,0)],[Vector2(-1,1),Vector2(1,0)]],
+		[[Vector2(-1,1),Vector2(1,0)],[Vector2(1,1),Vector2(-1,0)]],
+	],
+];

@@ -12,15 +12,18 @@ void main(){
 	bigships bs;
 	midships ms;
 	smlships ss;
+	enemybullets eb;
 	while (!WindowShouldClose()){
 		BeginDrawing();
 			ClearBackground(Colors.BLACK);
-			bs.update;
-			draw1(bs);
-			ms.update;
-			draw2(ms);
-			ss.update;
-			draw3(ss);
+			bs.update(eb);
+			draw(bs);
+			ms.update(eb);
+			draw(ms);
+			ss.update(eb);
+			draw(ss);
+			eb.update;
+			draw(eb);
 			int counter;
 			enum magic=65;
 			foreach(i;0..3){

@@ -1,8 +1,8 @@
 import consants;
 import raylib;
 struct player{
-	int x;
-	int y;
+	int x=cast(int)(playfieldx*.5)-w/2;
+	int y=cast(int)(playfieldy*.9);
 	enum w=64;
 	enum h=64;
 	int hp;
@@ -37,21 +37,16 @@ struct turret{
 	int x;
 	int y;
 	int firecd;
-	bool tier;
+	int which;
 	bool isdead(){
 		return y>playfieldy+100;
 	}
 }
-struct spike{
+enum collectable{mine,life,power,hp}
+struct collect{
 	int x;
 	int y;
-	bool isdead(){
-		return y>playfieldy+100;
-	}
-}
-struct powerup{
-	int x;
-	int y;
+	collectable type;
 	bool isdead(){
 		return y>playfieldy+100;
 	}
@@ -68,13 +63,11 @@ struct bullet{
 	}
 }
 import ring;
-//todo add shiparrays
 alias bigships    =ringarray!(bigship,20);
 alias midships    =ringarray!(midship,50);
 alias smlships    =ringarray!(smlship,300);
 alias turrets     =ringarray!(turret,50);
-alias spikes      =ringarray!(spike,50);
-alias powerups    =ringarray!(powerup,30);
+alias collectables=ringarray!(collect,100);
 alias bullets     =ringarray!(bullet,100);
 alias enemybullets=ringarray!(bullet,1500);
 alias unspawneds  =unspawned[];
@@ -82,4 +75,17 @@ alias sounds      =Sound[];
 //----
 alias tile=ubyte;
 alias tilerow=tile[25];
-alias background=ringarray!(tilerow,playfieldy/32+2,false);
+//alias background=ringarray!(tilerow,playfieldy/32+2,false);
+struct background{
+	ringarray!(tilerow,playfieldy/32+2,false) tiles;
+	string[playfieldy/48+2] words;
+	int offset=32;
+	void scroll(R)(ref R r){
+		offset--;
+		if(offset<=0){
+			tiles~=r.front;
+			r.popFront;
+			offset=32;
+		}
+	}
+}
