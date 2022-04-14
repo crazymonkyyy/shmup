@@ -7,7 +7,8 @@ import ship;
 mixin setupdraw!("ship");
 import ascii;
 mixin setupdraw!("ascii");
-//TODO, recreate the overload hack in survoir/drawing.mix
+mixin(import("sound.mix"));
+
 template draw_(){
 	void drawtilerow(tilerow a,int y){
 		foreach(i,e;a){
@@ -76,11 +77,23 @@ template draw_(){
 		foreach(e;c){
 			draw(e);
 	}}
+	void draw(turret t){
+		int which(int x){
+			switch(x){
+				case 0: return 30;
+				case 1: return 18;
+				case 2: return 17;
+				default: assert(0);
+			}
+		}
+		drawtile(29,t.x,t.y,2);
+		drawtile(which(t.which),t.x,t.y,2);
+	}
+	void draw(turrets t){
+		foreach(e;t){
+			draw(e);
+	}}
 }
-//void drawenemys(enemyships es){
-//	foreach(e;es){
-//		drawship(e.type,e.x,e.y,e.type<4?2:1);}
-//}
 
 auto draw(T...)(T args){
 	draw_!().draw(args);

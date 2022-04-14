@@ -4,6 +4,22 @@ import std.algorithm;
 import consants;
 import basic;
 import aiconsants;
+
+void add(ref enemybullets b,Vector2 from, Vector2[] list){
+	int which(Vector2 a){
+		return 0;//TODO: make different bullets types
+	}
+	foreach(e;list){
+		b~=bullet(
+			from.x.to!int,
+			from.y.to!int,
+			e.x.to!int,
+			e.y.to!int,
+			which(e)
+		);
+}}
+
+
 void update(ref bigships s,ref enemybullets b){
 	import pathfollow;
 	foreach(ref e;s){
@@ -43,19 +59,6 @@ void update(ref smlships s,ref enemybullets b){
 		}
 	}
 }
-void add(ref enemybullets b,Vector2 from, Vector2[] list){
-	int which(Vector2 a){
-		return 0;//TODO: make different bullets types
-	}
-	foreach(e;list){
-		b~=bullet(
-			from.x.to!int,
-			from.y.to!int,
-			e.x.to!int,
-			e.y.to!int,
-			which(e)
-		);
-}}
 void update(ref enemybullets bs){
 	foreach(ref b;bs[]){
 		b.x+=b.xv;
@@ -107,6 +110,28 @@ void update(ref player p, ref collectables c){
 		if(CheckCollisionRecs(box,r)){
 			e.x=3000;
 }}}
+void update(ref turrets ts,ref enemybullets e){
+	enum firecd=[25,8,14];
+	enum bulletlist=[
+		[Vector2(0,5)],
+		[Vector2(0,8)],
+		[Vector2(-2,4),Vector2(0,4),Vector2(2,4)],
+	];
+	enum offset=Vector2(8,8);
+	foreach(ref t;ts){
+		t.y+=scrollspeed;
+		if(t.firecd--==0){
+			t.firecd=firecd[t.which];
+			e.add(Vector2(t.x,t.y)+offset,bulletlist[t.which]);
+}}}
+void update(ref background b,ref player p){
+	if(p.isdead){
+		foreach(ref e;b.words){
+			e=[];
+		}
+		b.words[7]="    you dead";
+	}
+}
 /*
 void update(ref bullets bs){
 	foreach(ref b;bs[]){

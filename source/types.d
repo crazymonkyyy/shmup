@@ -5,9 +5,11 @@ struct player{
 	int y=cast(int)(playfieldy*.9);
 	enum w=64;
 	enum h=64;
-	int hp;
+	int hp=10;
 	int lives;
 	int firecd;
+	bool isdead(){
+		return hp==0;}
 }
 struct bigship{
 	Vector2 pos;
@@ -71,7 +73,7 @@ alias collectables=ringarray!(collect,100);
 alias bullets     =ringarray!(bullet,100);
 alias enemybullets=ringarray!(bullet,1500);
 alias unspawneds  =unspawned[];
-alias sounds      =Sound[];
+//alias sounds      =Sound[];
 //----
 alias tile=ubyte;
 alias tilerow=tile[25];
@@ -88,4 +90,10 @@ struct background{
 			offset=32;
 		}
 	}
+}
+struct sounds{
+	import basic;
+	
+	import tempsound;
+	mixin setupsound!"tempsound";
 }

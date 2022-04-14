@@ -17,10 +17,16 @@ void main(){
 			bg.tiles~=backgroundbuffer.front;
 			backgroundbuffer.popFront;
 	}
+	player p;
 	bg.words[4]="HIIIII";
 	while (!WindowShouldClose()){
 		BeginDrawing();
 			ClearBackground(Colors.BLACK);
+			if(IsKeyPressed(KeyboardKey.KEY_A)){
+				p.hp=0;
+				"ded".writeln;
+			}
+			bg.update(p);
 			//drawascii(1,100,100);
 			//bg~=cast(tilerow)(backgroundbuffer.front.to!string.map!(a=>cast(ubyte)a).staticArray!25);
 			draw(bg);bgoffset--;
