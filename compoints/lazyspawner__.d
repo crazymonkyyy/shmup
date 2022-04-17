@@ -13,6 +13,7 @@ void main(){
 	midships ms;
 	smlships ss;
 	enemybullets eb;
+	bullets b;
 	while (!WindowShouldClose()){
 		BeginDrawing();
 			ClearBackground(Colors.BLACK);
@@ -25,6 +26,9 @@ void main(){
 			eb.update;
 			draw(eb);
 			import lazyspawner;
+			
+			bs.update(b,sounds);
+			sounds.playtempsound;
 			spawn(bs,ms,ss);
 		EndDrawing();
 	}

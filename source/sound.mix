@@ -1,3 +1,10 @@
 InitAudioDevice();
 import tempsound;
 mixin setupsound!"tempsound";
+struct here{
+	ref opDispatch(string s)(){
+		return mixin(s);
+	}
+}
+import types;
+sounds_!here sounds;

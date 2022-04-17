@@ -9,12 +9,11 @@ enum windowy=playfieldy;
 
 void main(){
 	mixin(import("drawing.mix"));
-	sounds sounds_;
 	while (!WindowShouldClose()){
 		BeginDrawing();
 			ClearBackground(Colors.BLACK);
 			if(IsKeyPressed(KeyboardKey.KEY_A)){
-				
+				sounds.playtempsound;
 			}
 		EndDrawing();
 	}

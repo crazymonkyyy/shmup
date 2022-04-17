@@ -91,9 +91,9 @@ struct background{
 		}
 	}
 }
-struct sounds{
-	import basic;
-	
-	import tempsound;
-	mixin setupsound!"tempsound";
+struct sounds_(FRAME){
+	static FRAME main;
+	ref opDispatch(string s)(){
+		return mixin("main."~s);
+	}
 }

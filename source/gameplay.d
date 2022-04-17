@@ -132,6 +132,14 @@ void update(ref background b,ref player p){
 		b.words[7]="    you dead";
 	}
 }
+void update(A)(ref bigships bs,ref bullets b,ref sounds_!A s){
+	//foreach(ref e;bs){
+	//	foreach(ref f;b){
+	//		
+	//	}
+	//}
+	//s.playtempsound;
+}
 /*
 void update(ref bullets bs){
 	foreach(ref b;bs[]){
