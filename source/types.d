@@ -92,7 +92,7 @@ struct background{
 	}
 }
 struct sounds_(FRAME){
-	static FRAME main;
+	FRAME main;
 	ref opDispatch(string s)(){
 		return mixin("main."~s);
 	}

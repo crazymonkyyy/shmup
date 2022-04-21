@@ -138,7 +138,7 @@ void update(A)(ref bigships bs,ref bullets b,ref sounds_!A s){
 	//		
 	//	}
 	//}
-	//s.playtempsound;
+	s.playtempsound;
 }
 /*
 void update(ref bullets bs){
