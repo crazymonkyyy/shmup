@@ -57,26 +57,6 @@ void update(ref smlships s,ref enemybullets b){
 		}
 	}
 }
-
-void update(ref player p){
-	enum speed=4;
-	if (IsKeyDown(KeyboardKey.KEY_RIGHT)) p.x+=speed;
-	if (IsKeyDown(KeyboardKey.KEY_LEFT) ) p.x-=speed; 
-	if (IsKeyDown(KeyboardKey.KEY_UP)   ) p.y-=speed; 
-	if (IsKeyDown(KeyboardKey.KEY_DOWN) ) p.y+=speed;
-	p.x=min(playfieldx-p.w,max(0,p.x));
-	p.y=min(playfieldy-p.h,max(0,p.y));
-}
-void update(ref player p,ref bullets b){
-	if (IsKeyDown(KeyboardKey.KEY_Z)){
-		auto temp=bullet(p.x,p.y,0,-15,0);
-		temp.x+=32;
-		temp.y+=32;
-		temp.x-=bulletoffset.x;
-		temp.y-=bulletoffset.y;
-		b~=temp;
-	}
-}
 void update(ref turrets ts,ref enemybullets e){
 	enum firecd=[25,8,14];
 	enum bulletlist=[
@@ -91,3 +71,9 @@ void update(ref turrets ts,ref enemybullets e){
 			t.firecd=firecd[t.which];
 			e.add(Vector2(t.x,t.y)+offset,bulletlist[t.which]);
 }}}
+void update(ref bullets bs){
+	foreach(ref b;bs[]){
+		b.x+=b.xv;
+		b.y+=b.yv;
+	}
+}

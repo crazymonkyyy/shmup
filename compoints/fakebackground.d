@@ -18,41 +18,11 @@ void main(){
 		bg.tiles~=backgroundbuffer.front;
 		backgroundbuffer.popFront;
 	}
-	player p;
-	bigships bs;
-	midships ms;
-	smlships ss;
-	enemybullets eb;
-	bullets b;
 	while (!WindowShouldClose()){
 		BeginDrawing();
 			ClearBackground(Colors.BLACK);
 			draw(bg);bgoffset--;
-			bg.scroll(backgroundbuffer,p);
-			bs.update(eb);
-			draw(bs);
-			ms.update(eb);
-			draw(ms);
-			ss.update(eb);
-			draw(ss);
-			eb.update;
-			draw(eb);
-			p.update;
-			p.update(b);
-			p.update(eb,sounds);
-			draw(p);
-			b.update;
-			draw(b);
-			drawui(p);
-			
-			bs.update(b,sounds);
-			ms.update(b,sounds);
-			ss.update(b,sounds);
-			//sounds.playtempsound;
-
-			
-			import lazyspawner;
-			spawn(bs,ms,ss);
+			bg.scroll(backgroundbuffer);
 		EndDrawing();
 	}
 	CloseWindow();

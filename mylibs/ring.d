@@ -22,8 +22,11 @@ struct ringarray(T,int n,bool hasdead=true){
 				index++;length--;
 				index%=n;
 			}
+			import std.algorithm;
+			return range!(typeof(this))(&this,0,length).filter!(a=>!a.isdead);
+		}else{
+			return range!(typeof(this))(&this,0,length);
 		}
-		return range!(typeof(this))(&this,0,length);
 	}
 	void opOpAssign(string s:"~",S)(S a){
 		if(length<n){

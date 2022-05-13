@@ -9,6 +9,7 @@ enum windowy=playfieldy;
 
 void main(){
 	mixin(import("drawing.mix"));
+	player p;
 	bigships bs;
 	midships ms;
 	smlships ss;
@@ -25,10 +26,16 @@ void main(){
 			draw(ss);
 			eb.update;
 			draw(eb);
+			p.update(b);
+			draw(p);
+			b.update;
+			draw(b);
 			import lazyspawner;
 			
 			bs.update(b,sounds);
-			sounds.playtempsound;
+			ms.update(b,sounds);
+			ss.update(b,sounds);
+			//sounds.playtempsound;
 			spawn(bs,ms,ss);
 		EndDrawing();
 	}

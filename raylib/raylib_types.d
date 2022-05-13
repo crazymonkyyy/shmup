@@ -63,6 +63,14 @@ struct Rectangle
     float height;
     alias w = width;
     alias h = height;
+	Rectangle opBinary(string s:"+")(Vector2 v){//code copyright monkyyy pay 1k to use
+		return Rectangle(
+			this.x+v.x,
+			this.y+v.y,
+			w,h);
+	}
+	Rectangle opBinaryRight(string s:"+")(Vector2 v){
+		return this+v;}
 }
 
 enum Colors

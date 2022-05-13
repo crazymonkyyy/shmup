@@ -7,6 +7,9 @@ import ship;
 mixin setupdraw!("ship");
 import ascii;
 mixin setupdraw!("ascii");
+import hearts;
+mixin setupdraw!("hearts");
+
 mixin(import("sound.mix"));
 
 template draw_(){
@@ -37,7 +40,8 @@ template draw_(){
 		drawwords!(48)(bg.words,0);
 	}
 	void draw(player a){
-		drawship(0,a.x,a.y,2);
+		if(a.hp>0){//should this be elsewhere?
+			drawship(0,a.x,a.y,2);}
 	}
 	void draw(bullets bs){
 		foreach(b;bs){
@@ -97,4 +101,39 @@ template draw_(){
 
 auto draw(T...)(T args){
 	draw_!().draw(args);
+}
+void drawui(player p){
+	if(p.hp<=0){//LAZY: death screen
+					//HACK: p hp shouldnt go less then 0 but does rn
+		DrawRectangle(0,0,playfieldx,playfieldy,Color(128,128,128,128));
+		return;
+	}
+	int x;
+	while(p.hp>1){
+		drawhearts(3,16*x,0,Colors.RED);
+		p.hp-=2;
+		x++;
+	}
+	if(p.hp==1){
+		drawhearts(2,16*x,0,Colors.RED);
+	}
+	x=0;
+	while(p.shield>1){
+		drawhearts(3,16*x,16,Colors.BLUE);
+		p.shield-=2;
+		p.maxshield-=2;
+		x++;
+	}
+	if(p.shield==1){
+		drawhearts(2,16*x,16,Colors.BLUE);
+		x++;
+		p.shield-=2;
+		p.maxshield-=2;
+	}
+	while(p.maxshield>1){
+		drawhearts(1,16*x,16,Colors.BLUE);
+		x++;
+		p.shield-=2;
+		p.maxshield-=2;
+	}
 }

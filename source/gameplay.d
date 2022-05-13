@@ -7,12 +7,6 @@ public import ulitygameplay;
 
 
 /*
-void update(ref bullets bs){
-	foreach(ref b;bs[]){
-		b.x+=b.xv;
-		b.y+=b.yv;
-	}
-}
 
 void update(ref enemyships es,ref enemybullets eb,ref bullets bs,ref sounds deathsounds){
 	foreach(ref e;es){

@@ -38,7 +38,6 @@ int randomindex(int max,ref int last){
 		x++;
 	}
 	last=x;
-	x.writeln;
 	return x;
 }
 bool shouldplay(int num){
